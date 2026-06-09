@@ -36,7 +36,7 @@
 
   /* ── WRAPPER ── */
   .wrapper {
-    max-width: 1000px;
+    max-width: 1180px;
     margin: 0 auto;
     background: var(--white);
     box-shadow: var(--shadow-lg);
@@ -1166,7 +1166,7 @@
      SCHEDULE HORIZONTAL (가로 일정표)
   ══════════════════════════════ */
   .schedule-wrap {
-    overflow-x: auto;
+    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     margin: 0 -24px;
     padding: 0 24px;
@@ -1175,9 +1175,9 @@
   }
   .schedule-grid {
     display: grid;
-    grid-template-columns: repeat(5, minmax(200px, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 10px;
-    min-width: 1100px;
+    min-width: 0;
     padding-bottom: 8px;
   }
   .sch-card { border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.07); display: block; width: 100%; }
@@ -2236,9 +2236,15 @@
     box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
   }
 
+  /* 지도 스타일 토글 버튼 */
+  .map-tool-btn.map-style-btn { font-size: 13px; padding: 7px 12px; }
+  #mapOpenGoogle { font-size: 13px; padding: 7px 12px; color: var(--text-muted); }
+  #mapOpenGoogle:hover { background: var(--surface2); color: var(--lg-red); border-color: var(--lg-red); }
+
   @media (max-width: 600px) {
     .map-container { height: 380px; }
     .map-tool-btn { font-size: 13px; padding: 7px 11px; }
+    .map-toolbar > span { display: none; }
   }
 
   /* Permanent marker labels (한글 / English) */
@@ -2326,13 +2332,10 @@
 
   <!-- ══ 상단 네비 탭바 ══ -->
   <div class="nav-tabbar" id="navTabbar">
-    <div class="nav-tab" id="ntab-mac-6" onclick="navTabClick('mac-6')"><span class="nav-tab-icon">🗓</span>과정 여정</div>
     <div class="nav-tab" id="ntab-mac-0" onclick="navTabClick('mac-0')"><span class="nav-tab-icon">📋</span>출발 전 체크리스트</div>
     <div class="nav-tab" id="ntab-mac-2" onclick="navTabClick('mac-2')"><span class="nav-tab-icon">🏢</span>교육 일정</div>
     <div class="nav-tab" id="ntab-mac-7" onclick="navTabClick('mac-7')"><span class="nav-tab-icon">🗺</span>활동 지도</div>
-    <div class="nav-tab" id="ntab-mac-5" onclick="navTabClick('mac-5')"><span class="nav-tab-icon">💡</span>가기 전 생각할 거리</div>
     <div class="nav-tab" id="ntab-mac-4" onclick="navTabClick('mac-4')"><span class="nav-tab-icon">✅</span>현장 미션</div>
-    <div class="nav-tab" id="ntab-mac-3" onclick="openSurveyDrawer()"><span class="nav-tab-icon">📝</span>사전 Survey</div>
   </div>
 
 
@@ -2341,108 +2344,6 @@
        MAIN ACCORDION
   ══════════════════════════════ -->
   <div class="main-accord-wrap">
-
-    <!-- ⓪ 과정 여정 -->
-    <div class="main-accord-item open" id="mac-6">
-      <button class="main-accord-trigger" onclick="toggleMAC('mac-6')">
-        <div class="mat-icon-wrap">🗓</div>
-        <div class="mat-texts">
-          <div class="mat-title">과정 여정</div>
-          <div class="mat-sub">출발 전 ~ 과정 후까지 전체 일정을 한 눈에 확인하세요</div>
-        </div>
-        <span class="mat-chevron">▼</span>
-      </button>
-      <div class="main-accord-body">
-        <div style="padding:16px 24px 20px;">
-          <div class="journey-timeline">
-
-            <div class="jt-item">
-              <div class="jt-date-col"><div class="jt-date">지금</div><div class="jt-date-sub">즉시 시작</div></div>
-              <div class="jt-dot" style="background:#6b7280;"></div>
-              <div class="jt-line"></div>
-              <div class="jt-card">
-                <div class="jt-badge" style="background:#f3f4f6;color:#374151;">사전 준비</div>
-                <div class="jt-title">📋 출발 전 TO DO 시작</div>
-                <div class="jt-desc">Alipay/WeChat Pay 설치 및 카드 등록, 로밍 신청, 중국 출장자 필수 과정 수강, 사전 Needs Survey 응답 등을 지금 바로 시작하세요. 출발 1주일 전까지 완료를 권장합니다.</div>
-                <div class="jt-chips">
-                  <span class="jt-chip" style="cursor:pointer;border-color:var(--lg-red);color:var(--lg-red);" onclick="navTabClick('mac-0');setTimeout(function(){switchPrep(2)},300)">📱 Alipay 앱 설치 · 카드 등록 ↗</span><span class="jt-chip" style="cursor:pointer;border-color:var(--lg-red);color:var(--lg-red);" onclick="navTabClick('mac-0');setTimeout(function(){switchPrep(3)},300)">📚 EP 필수 과정 이수 ↗</span><span class="jt-chip" style="cursor:pointer;border-color:var(--lg-red);color:var(--lg-red);" onclick="navTabClick('mac-0');setTimeout(function(){switchPrep(4)},300)">✈ 출장품의 ↗</span><span class="jt-chip" style="cursor:pointer;border-color:#2a5298;color:#2a5298;" onclick="openSurveyDrawer()">📝 사전 Needs Survey ↗</span><span class="jt-chip">U+ 로밍 신청</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="jt-item">
-              <div class="jt-date-col"><div class="jt-date">6/15</div><div class="jt-date-sub">월요일 (예정)</div></div>
-              <div class="jt-dot" style="background:#ca8a04;"></div>
-              <div class="jt-line"></div>
-              <div class="jt-card">
-                <div class="jt-badge" style="background:#fef9c3;color:#854d0e;">사전 오리엔테이션</div>
-                <div class="jt-title">🎙 Webex 사전 오리엔테이션 (약 1시간)</div>
-                <div class="jt-desc">본 일정 출발 약 1주일 전, Webex로 진행되는 온라인 오리엔테이션입니다. 일정·미션 안내, 조별 활동 안내, Q&amp;A가 진행됩니다. 일정은 추후 별도 안내될 예정이니 캘린더를 비워두세요.</div>
-                <div class="jt-chips">
-                  <span class="jt-chip">📅 6/15 예정 (추후 별도 안내)</span><span class="jt-chip">🖥 Webex 온라인</span><span class="jt-chip">⏱ 약 1시간</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="jt-item">
-              <div class="jt-date-col"><div class="jt-date">6/22</div><div class="jt-date-sub">월 · 출발일</div></div>
-              <div class="jt-dot" style="background:#2563eb;"></div>
-              <div class="jt-line"></div>
-              <div class="jt-card">
-                <div class="jt-badge" style="background:#dbeafe;color:#1d4ed8;">출발</div>
-                <div class="jt-title">✈ 인천 08:40 출발 → 심천 11:35 도착</div>
-                <div class="jt-desc">05:30 인천 국제공항 T2 집합 → KE085 탑승 → 심천 도착 후 중식 및 일정 시작.</div>
-                <div class="jt-chips">
-                  <span class="jt-chip">🕠 05:30 T2 집합</span><span class="jt-chip">KE085 · 인천T2 08:40 출발</span><span class="jt-chip">심천 11:35 도착</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="jt-item">
-              <div class="jt-date-col"><div class="jt-date">6/22–25</div><div class="jt-date-sub">월~목 · 본일정</div></div>
-              <div class="jt-dot" style="background:#A50034;box-shadow:0 0 0 4px rgba(165,0,52,0.15);"></div>
-              <div class="jt-line"></div>
-              <div class="jt-card" style="background:#fdf2f5;border-color:#f9c6d2;">
-                <div class="jt-badge" style="background:#A50034;color:#fff;">본일정</div>
-                <div class="jt-title">🇨🇳🇭🇰 심천 · 홍콩 해외 B/M 본일정</div>
-                <div class="jt-desc">심천 3일간 로봇·자동화, 자율주행·모빌리티, 유통·제조 생태계를 현장에서 체험하며 LG전자 연구/개발·사업 관점의 인사이트를 정리합니다. 홍콩에서는 디자인 허브·리테일·문화 공간을 조별 활동으로 탐방하며 디자인/UX 관점을 집중 점검합니다.</div>
-                <div class="jt-chips">
-                  <span class="jt-chip" style="background:#fde8ef;color:#A50034;border-color:#f9c6d2;">DAY1 로봇·유통 생태계</span><span class="jt-chip" style="background:#fde8ef;color:#A50034;border-color:#f9c6d2;">DAY2 자율주행·물류 운영</span><span class="jt-chip" style="background:#fde8ef;color:#A50034;border-color:#f9c6d2;">DAY3 로봇·EV 전략</span><span class="jt-chip" style="background:#fde8ef;color:#A50034;border-color:#f9c6d2;">DAY4 홍콩 디자인·UX</span><span class="jt-chip">총 10개소 방문</span><span class="jt-chip">조별 활동 · Action Item</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="jt-item">
-              <div class="jt-date-col"><div class="jt-date">6/26</div><div class="jt-date-sub">금 · 귀국일</div></div>
-              <div class="jt-dot" style="background:#2563eb;"></div>
-              <div class="jt-line"></div>
-              <div class="jt-card">
-                <div class="jt-badge" style="background:#dbeafe;color:#1d4ed8;">귀국</div>
-                <div class="jt-title">✈ 홍콩 12:20 출발 → 인천 17:05 도착</div>
-                <div class="jt-desc">호텔 조식 후 체크아웃 → 10:30 공항 도착 및 탑승 수속 → KE2002 탑승 → 인천 T2 도착 후 해산.</div>
-                <div class="jt-chips">
-                  <span class="jt-chip">🕥 10:30 공항 도착</span><span class="jt-chip">KE2002 · 홍콩 12:20 출발</span><span class="jt-chip">인천T2 17:05 도착</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="jt-item jt-item-last">
-              <div class="jt-date-col"><div class="jt-date">귀국 후</div><div class="jt-date-sub">사후 Survey · 보고서</div></div>
-              <div class="jt-dot" style="background:#16a34a;"></div>
-              <div class="jt-card">
-                <div class="jt-badge" style="background:#f0fdf4;color:#166534;">사후 과제</div>
-                <div class="jt-title">📝 사후 Survey 응답 · 인사이트 보고서 제출</div>
-                <div class="jt-desc">현장에서 도출한 연구/개발·사업 관점 인사이트와 홍콩 디자인/UX Action Item을 함께 정리하여 제출합니다. 사후 만족도/인사이트 Survey와 함께 진행되며, 제출 기한 및 양식은 귀국 후 별도 안내됩니다.</div>
-                <div class="jt-chips">
-                  <span class="jt-chip" style="cursor:pointer;border-color:#16a34a;color:#16a34a;" onclick="openPostSurveyDrawer()">📝 사후 Survey ↗</span><span class="jt-chip">연구/개발 인사이트</span><span class="jt-chip">홍콩 디자인/UX Action Item</span><span class="jt-chip">기한 귀국 후 별도 안내</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- ① 사전 준비 -->
     <div class="main-accord-item open" id="mac-0">
@@ -2488,25 +2389,28 @@
       <div class="weather-notice">
         <strong>심천·홍콩 날씨 (6월 하순)</strong> — 매우 무덥고 다습합니다. 스콜성 소나기가 잦으니 가벼운 우산을 챙기시거나 호텔 제공 우산을 활용하세요.
       </div>
-      <div class="weather-grid">
-        <div class="weather-card">
+      <div class="weather-grid" id="weatherGrid">
+        <div class="weather-card" data-date="2026-06-22" data-loc="shenzhen">
           <div class="weather-date-row"><span class="weather-date">6/22 (월) 심천</span><span class="weather-temp-inline">32° / 27°</span></div>
           <div class="weather-icon-row"><span class="weather-icon">🌦️</span><span class="weather-cond">소나기</span></div>
         </div>
-        <div class="weather-card">
+        <div class="weather-card" data-date="2026-06-23" data-loc="shenzhen">
           <div class="weather-date-row"><span class="weather-date">6/23 (화) 심천</span><span class="weather-temp-inline">33° / 27°</span></div>
           <div class="weather-icon-row"><span class="weather-icon">⛅</span><span class="weather-cond">흐림/소나기</span></div>
         </div>
-        <div class="weather-card">
+        <div class="weather-card" data-date="2026-06-24" data-loc="shenzhen">
           <div class="weather-date-row"><span class="weather-date">6/24 (수) 심천</span><span class="weather-temp-inline">32° / 27°</span></div>
           <div class="weather-icon-row"><span class="weather-icon">🌦️</span><span class="weather-cond">소나기</span></div>
         </div>
-        <div class="weather-card">
+        <div class="weather-card" data-date="2026-06-25" data-loc="hongkong">
           <div class="weather-date-row"><span class="weather-date">6/25 (목) 홍콩</span><span class="weather-temp-inline">31° / 27°</span></div>
           <div class="weather-icon-row"><span class="weather-icon">🌧️</span><span class="weather-cond">비</span></div>
         </div>
       </div>
-      <div class="weather-note">* 6월은 우기에 해당합니다. 출발 전 일기예보 재확인 권장.</div>
+      <div class="weather-note" id="weatherNote">
+        <span id="weatherStatus">* 6월은 우기에 해당합니다. 출발 전 일기예보 재확인 권장.</span>
+        <button type="button" id="weatherRefreshBtn" onclick="updateWeather(true)" style="margin-left:8px;font-size:11px;padding:2px 8px;border:1px solid var(--border);background:#fff;border-radius:10px;cursor:pointer;color:var(--text-muted);">🔄 새로고침</button>
+      </div>
       <div class="baggage-section-title" style="margin-top:18px;">개인 준비물 체크</div>
       <table class="prep-table">
         <thead><tr><th>항목</th><th>안내</th></tr></thead>
@@ -3041,6 +2945,10 @@
             <button class="map-tool-btn active" id="mapBtn-all" onclick="setMapView('all')">🌏 전체</button>
             <button class="map-tool-btn" id="mapBtn-shenzhen" onclick="setMapView('shenzhen')">🇨🇳 심천</button>
             <button class="map-tool-btn" id="mapBtn-hongkong" onclick="setMapView('hongkong')">🇭🇰 홍콩</button>
+            <span style="flex:1;"></span>
+            <button class="map-tool-btn map-style-btn active" id="mapStyleBtn-roadmap" onclick="setMapStyle('roadmap')">🗺 지도</button>
+            <button class="map-tool-btn map-style-btn" id="mapStyleBtn-hybrid" onclick="setMapStyle('hybrid')">🛰 위성</button>
+            <a class="map-tool-btn" id="mapOpenGoogle" href="https://www.google.com/maps/search/?api=1&query=22.55,114.10" target="_blank" rel="noopener" style="text-decoration:none;">↗ Google 지도에서 열기</a>
           </div>
 
           <div class="map-container" id="activityMap"></div>
@@ -3135,45 +3043,6 @@
         </div>
       </div>
     </div>
-    <div class="main-accord-item open" id="mac-3">
-      <button class="main-accord-trigger" onclick="toggleMAC('mac-3')">
-        <div class="mat-icon-wrap">📝</div>
-        <div class="mat-texts">
-          <div class="mat-title">사전 Needs Survey</div>
-          <div class="mat-sub"></div>
-        </div>
-        <span class="mat-chevron">▼</span>
-      </button>
-      <div class="main-accord-body">
-        <!-- ── 설문 ── -->
-  <div class="section" style="padding-top:24px;">
-
-
-    <div class="survey-card">
-      <div class="s-icon">📋</div>
-      <div class="s-label">Action Required</div>
-      <div class="s-title">사전 Needs Survey</div>
-      <div class="s-desc">
-        참가 기대사항 · 연구/개발 관심 주제 · 개인별 유의사항을 사전에 수렴합니다.<br>
-        출발 전까지 꼭 응답해 주세요. <strong>(설문 링크 추후 안내)</strong>
-      </div>
-      <button onclick="openSurveyDrawer()" class="btn-white" style="cursor:pointer;border:none;width:100%;">사전 설문 열기 →</button>
-    </div>
-
-    <div class="survey-card" style="margin-top:14px;background:linear-gradient(135deg,#15803d 0%,#16a34a 100%);">
-      <div class="s-icon">🌱</div>
-      <div class="s-label">After Return</div>
-      <div class="s-title">사후 Survey · Action Item</div>
-      <div class="s-desc">
-        귀국 후 진행되는 사후 설문입니다. 현장에서 도출한 <strong>연구/개발 인사이트 + 홍콩 디자인/UX Action Item</strong>,<br>
-        업무 적용 계획, 개선 제언을 함께 정리합니다. <strong>(귀국 후 별도 안내)</strong>
-      </div>
-      <button onclick="openPostSurveyDrawer()" class="btn-white" style="cursor:pointer;border:none;width:100%;">사후 설문 열기 →</button>
-    </div>
-  </div>
-      </div>
-    </div>
-
   </div>
 
 
@@ -3330,7 +3199,7 @@ function closeLGeniePopup() {
       </div>
       <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid #f9c6d2;border-radius:10px;background:#fdf2f5;">
         <span style="flex-shrink:0;font-size:14px;font-weight:800;color:#fff;background:var(--lg-red);padding:4px 10px;border-radius:20px;width:130px;text-align:center;box-sizing:border-box;">Capstone</span>
-        <div style="font-size:14px;color:#7a0026;line-height:1.65;font-weight:600;">인사이트 통합·비즈니스 적용 토론 및 수료식</div>
+        <div style="font-size:14px;color:#7a0026;line-height:1.65;font-weight:600;">인사이트 통합·비즈니스 적용 토론</div>
       </div>
     </div>
   </div>
@@ -3496,13 +3365,13 @@ document.addEventListener('keydown', function(e) {
       document.body.style.overflow = 'hidden';
       // 탭 활성화
       document.querySelectorAll('.nav-tab').forEach(function(t){ t.classList.remove('active'); });
-      document.getElementById('ntab-mac-3').classList.add('active');
+      var _nt3a = document.getElementById('ntab-mac-3'); if (_nt3a) _nt3a.classList.add('active');
     }
     function closeSurveyDrawer() {
       document.getElementById('surveyDrawer').classList.remove('open');
       document.getElementById('surveyDrawerOverlay').classList.remove('open');
       document.body.style.overflow = '';
-      document.getElementById('ntab-mac-3').classList.remove('active');
+      var _nt3r = document.getElementById('ntab-mac-3'); if (_nt3r) _nt3r.classList.remove('active');
     }
     function openPostSurveyDrawer() {
       document.getElementById('postSurveyDrawer').classList.add('open');
@@ -3792,9 +3661,12 @@ document.addEventListener('keydown', function(e) {
 </script>
 
 <script>
-  /* ───────── ACTIVITY MAP (Leaflet) ───────── */
+  /* ───────── ACTIVITY MAP (Leaflet + Google tiles) ───────── */
   var _activityMap = null;
   var _mapMarkers = [];
+  var _googleRoadLayer = null;
+  var _googleHybridLayer = null;
+  var _currentMapStyle = 'roadmap';
 
   // 방문지 데이터 — 근사 좌표
   var MAP_POINTS = [
@@ -3859,12 +3731,24 @@ document.addEventListener('keydown', function(e) {
       scrollWheelZoom: false
     });
 
-    // CARTO Voyager — 영문 지명 라벨이 포함된 깔끔한 베이스맵
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      maxZoom: 19,
-      subdomains: 'abcd',
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>'
-    }).addTo(_activityMap);
+    // Google Maps 타일 (한국어 라벨)
+    _googleRoadLayer = L.tileLayer('https://mt{s}.google.com/vt/lyrs=m&hl=ko&x={x}&y={y}&z={z}', {
+      maxZoom: 20,
+      subdomains: ['0','1','2','3'],
+      attribution: '&copy; Google Maps'
+    });
+    _googleHybridLayer = L.layerGroup([
+      L.tileLayer('https://mt{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        subdomains: ['0','1','2','3']
+      }),
+      L.tileLayer('https://mt{s}.google.com/vt/lyrs=h&hl=ko&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        subdomains: ['0','1','2','3'],
+        attribution: '&copy; Google Maps'
+      })
+    ]);
+    _googleRoadLayer.addTo(_activityMap);
 
     // 주요 지역명 라벨 (한글 / English)
     MAP_AREAS.forEach(function(a) {
@@ -3936,18 +3820,42 @@ document.addEventListener('keydown', function(e) {
 
   function setMapView(view) {
     if (!_activityMap) return;
-    document.querySelectorAll('.map-tool-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.querySelectorAll('.map-tool-btn').forEach(function(b){
+      if (b.classList.contains('map-style-btn')) return;
+      if (b.id === 'mapOpenGoogle') return;
+      b.classList.remove('active');
+    });
     var btn = document.getElementById('mapBtn-' + view);
     if (btn) btn.classList.add('active');
 
+    var googleUrl = 'https://www.google.com/maps/search/?api=1&query=22.55,114.10';
     if (view === 'shenzhen') {
       _activityMap.setView([22.58, 114.10], 10);
+      googleUrl = 'https://www.google.com/maps/search/?api=1&query=22.58,114.10';
     } else if (view === 'hongkong') {
       _activityMap.setView([22.30, 114.18], 12);
+      googleUrl = 'https://www.google.com/maps/search/?api=1&query=22.30,114.18';
     } else {
       // 전체: 모든 마커가 보이도록 fitBounds
       var pts = MAP_POINTS.concat(MAP_HOTELS).map(function(p){ return [p.lat, p.lng]; });
       _activityMap.fitBounds(pts, { padding: [30, 30] });
+    }
+    var goLink = document.getElementById('mapOpenGoogle');
+    if (goLink) goLink.href = googleUrl;
+  }
+
+  function setMapStyle(style) {
+    if (!_activityMap || !_googleRoadLayer || !_googleHybridLayer) return;
+    _currentMapStyle = style;
+    document.querySelectorAll('.map-style-btn').forEach(function(b){ b.classList.remove('active'); });
+    var sb = document.getElementById('mapStyleBtn-' + style);
+    if (sb) sb.classList.add('active');
+    if (style === 'hybrid') {
+      if (_activityMap.hasLayer(_googleRoadLayer)) _activityMap.removeLayer(_googleRoadLayer);
+      if (!_activityMap.hasLayer(_googleHybridLayer)) _googleHybridLayer.addTo(_activityMap);
+    } else {
+      if (_activityMap.hasLayer(_googleHybridLayer)) _activityMap.removeLayer(_googleHybridLayer);
+      if (!_activityMap.hasLayer(_googleRoadLayer)) _googleRoadLayer.addTo(_activityMap);
     }
   }
 
@@ -5102,7 +5010,7 @@ document.addEventListener('keydown', function(e) {
   window.addEventListener('scroll', function() {
     var tabbar = document.getElementById('navTabbar');
     var offset = tabbar ? tabbar.offsetHeight + 20 : 60;
-    var macs = ['mac-6','mac-0','mac-2','mac-5','mac-4','mac-3'];
+    var macs = ['mac-0','mac-2','mac-4'];
     var active = null;
     for (var i = 0; i < macs.length; i++) {
       var el = document.getElementById(macs[i]);
@@ -5173,6 +5081,115 @@ window.switchSubTab = function(idx) {
   document.querySelectorAll('.sub-tab').forEach(function(t, i) { t.classList.toggle('active', i === idx); });
   document.querySelectorAll('.sub-panel').forEach(function(p, i) { p.classList.toggle('active', i === idx); });
 };
+</script>
+
+<script>
+/* ══ 일기예보 자동 갱신 (Open-Meteo · API 키 불필요) ══ */
+(function(){
+  var COORDS = {
+    shenzhen: { lat: 22.5431, lng: 114.0579, tz: 'Asia/Shanghai' },
+    hongkong: { lat: 22.3193, lng: 114.1694, tz: 'Asia/Hong_Kong' }
+  };
+
+  function wmoToIconCond(code, pop) {
+    var r;
+    if (code === 0) r = { icon: '☀️', cond: '맑음' };
+    else if (code === 1) r = { icon: '🌤️', cond: '대체로 맑음' };
+    else if (code === 2) r = { icon: '⛅', cond: '구름 조금' };
+    else if (code === 3) r = { icon: '☁️', cond: '흐림' };
+    else if (code === 45 || code === 48) r = { icon: '🌫️', cond: '안개' };
+    else if (code >= 51 && code <= 57) r = { icon: '🌦️', cond: '이슬비' };
+    else if (code >= 61 && code <= 63) r = { icon: '🌧️', cond: '비' };
+    else if (code === 65) r = { icon: '🌧️', cond: '강한 비' };
+    else if (code === 66 || code === 67) r = { icon: '🌧️', cond: '얼음비' };
+    else if (code >= 71 && code <= 77) r = { icon: '🌨️', cond: '눈' };
+    else if (code === 80) r = { icon: '🌦️', cond: '소나기' };
+    else if (code === 81) r = { icon: '🌧️', cond: '소나기' };
+    else if (code === 82) r = { icon: '⛈️', cond: '강한 소나기' };
+    else if (code === 85 || code === 86) r = { icon: '🌨️', cond: '눈 소나기' };
+    else if (code === 95) r = { icon: '⛈️', cond: '뇌우' };
+    else if (code === 96 || code === 99) r = { icon: '⛈️', cond: '뇌우/우박' };
+    else r = { icon: '🌡️', cond: '확인 필요' };
+    if (typeof pop === 'number' && pop >= 30) r.cond = r.cond + ' (' + pop + '%)';
+    return r;
+  }
+
+  function fetchForecast(loc, startDate, endDate) {
+    var c = COORDS[loc];
+    var url = 'https://api.open-meteo.com/v1/forecast'
+      + '?latitude=' + c.lat + '&longitude=' + c.lng
+      + '&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max'
+      + '&timezone=' + encodeURIComponent(c.tz)
+      + '&start_date=' + startDate + '&end_date=' + endDate;
+    return fetch(url).then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+  }
+
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+
+  window.updateWeather = function(manual) {
+    var cards = document.querySelectorAll('#weatherGrid .weather-card');
+    if (!cards.length) return;
+    var status = document.getElementById('weatherStatus');
+    if (manual && status) status.textContent = '⏳ 일기예보 불러오는 중…';
+
+    // 카드별 날짜·지역
+    var byLoc = { shenzhen: [], hongkong: [] };
+    cards.forEach(function(card){
+      var loc = card.getAttribute('data-loc');
+      var date = card.getAttribute('data-date');
+      if (loc && date && byLoc[loc]) byLoc[loc].push({ card: card, date: date });
+    });
+
+    var locs = Object.keys(byLoc).filter(function(k){ return byLoc[k].length > 0; });
+    var jobs = locs.map(function(loc){
+      var dates = byLoc[loc].map(function(x){ return x.date; }).sort();
+      return fetchForecast(loc, dates[0], dates[dates.length-1])
+        .then(function(data){ return { loc: loc, data: data }; });
+    });
+
+    Promise.all(jobs).then(function(results){
+      var anyUpdated = false;
+      results.forEach(function(res){
+        var times = (res.data && res.data.daily && res.data.daily.time) || [];
+        byLoc[res.loc].forEach(function(entry){
+          var idx = times.indexOf(entry.date);
+          if (idx < 0) return;
+          var tmax = Math.round(res.data.daily.temperature_2m_max[idx]);
+          var tmin = Math.round(res.data.daily.temperature_2m_min[idx]);
+          var code = res.data.daily.weathercode[idx];
+          var pop  = res.data.daily.precipitation_probability_max[idx];
+          var ic = wmoToIconCond(code, pop);
+          var tempEl = entry.card.querySelector('.weather-temp-inline');
+          var iconEl = entry.card.querySelector('.weather-icon');
+          var condEl = entry.card.querySelector('.weather-cond');
+          if (tempEl) tempEl.textContent = tmax + '° / ' + tmin + '°';
+          if (iconEl) iconEl.textContent = ic.icon;
+          if (condEl) condEl.textContent = ic.cond;
+          anyUpdated = true;
+        });
+      });
+      if (status) {
+        var now = new Date();
+        var ts = (now.getMonth()+1) + '/' + now.getDate() + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes());
+        if (anyUpdated) {
+          status.innerHTML = '✅ Open-Meteo 자동 갱신됨 · 마지막 갱신: <strong>' + ts + '</strong> · 출발 전 재확인 권장';
+        } else {
+          status.textContent = '* 예보 범위 밖(16일 이후)입니다. 기본값을 표시합니다.';
+        }
+      }
+    }).catch(function(e){
+      if (status) status.textContent = '⚠ 일기예보 자동 갱신 실패 — 기본값을 표시합니다. (' + (e && e.message ? e.message : 'network') + ')';
+    });
+  };
+
+  // 페이지 로드 시 1회 + 1시간마다 자동 갱신
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(function(){ window.updateWeather(false); }, 300);
+  } else {
+    window.addEventListener('load', function(){ window.updateWeather(false); });
+  }
+  setInterval(function(){ window.updateWeather(false); }, 60 * 60 * 1000);
+})();
 </script>
 
 </body>
