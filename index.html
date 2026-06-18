@@ -5015,6 +5015,7 @@ document.addEventListener('keydown', function(e) {
 </script>
 <script>
 /* ── 모바일 일정표 탭 ── */
+var _schMode = null;
 function initSchTabs() {
   var isMobile = window.innerWidth <= 640;
   var tabBar = document.getElementById('schTabBar');
@@ -5022,11 +5023,17 @@ function initSchTabs() {
   if (!tabBar) return;
   if (isMobile) {
     tabBar.style.display = 'flex';
-    cards.forEach(function(c, i) { c.classList.toggle('sch-active', i === 0); });
+    // 모바일 모드 진입 시(또는 활성 카드가 없을 때)에만 첫 탭을 활성화.
+    // 모바일에서 스크롤 중 주소창 표시/숨김으로 resize가 발생해도 현재 탭을 유지한다.
+    var anyActive = Array.prototype.some.call(cards, function(c){ return c.classList.contains('sch-active'); });
+    if (_schMode !== 'mobile' || !anyActive) {
+      cards.forEach(function(c, i) { c.classList.toggle('sch-active', i === 0); });
+    }
   } else {
     tabBar.style.display = 'none';
     cards.forEach(function(c) { c.classList.remove('sch-active'); c.style.display = ''; });
   }
+  _schMode = isMobile ? 'mobile' : 'desktop';
 }
 window.switchSchTab = function(day) {
   var cards = document.querySelectorAll('.sch-card');
@@ -5036,6 +5043,7 @@ window.switchSchTab = function(day) {
 };
 
 /* ── 모바일 체크리스트 탭 ── */
+var _clMode = null;
 function initClTabs() {
   var isMobile = window.innerWidth <= 640;
   var tabBar = document.getElementById('clTabBar');
@@ -5043,11 +5051,17 @@ function initClTabs() {
   if (!tabBar) return;
   if (isMobile) {
     tabBar.style.display = 'flex';
-    groups.forEach(function(g, i) { g.classList.toggle('cl-active', i === 0); });
+    // 모바일 모드 진입 시(또는 활성 그룹이 없을 때)에만 DAY1을 활성화.
+    // 스크롤 중 주소창 표시/숨김으로 resize가 발생해도 현재 DAY 탭을 유지한다.
+    var anyActive = Array.prototype.some.call(groups, function(g){ return g.classList.contains('cl-active'); });
+    if (_clMode !== 'mobile' || !anyActive) {
+      groups.forEach(function(g, i) { g.classList.toggle('cl-active', i === 0); });
+    }
   } else {
     tabBar.style.display = 'none';
     groups.forEach(function(g) { g.classList.remove('cl-active'); g.style.display = ''; });
   }
+  _clMode = isMobile ? 'mobile' : 'desktop';
 }
 window.switchClTab = function(idx) {
   var groups = document.querySelectorAll('.cl-group');
