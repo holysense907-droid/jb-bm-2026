@@ -1046,8 +1046,58 @@
   .prep-table td:first-child { font-weight: 700; color: var(--text); width: 110px; white-space: nowrap; word-break: keep-all; }
   .prep-table .red { color: var(--lg-red); font-weight: 600; }
 
-  /* duty-free compare table (mobile optimized) */
-  .duty-table td { word-break: keep-all; overflow-wrap: anywhere; }
+  /* duty-free cards */
+  .duty-wrap { margin-top: 12px; }
+  .duty-country-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .duty-country-card {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    overflow: hidden;
+  }
+  .duty-country-head {
+    padding: 10px 14px;
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.5px;
+  }
+  .duty-cn .duty-country-head { background: #b91c1c; }
+  .duty-hk .duty-country-head { background: #0f766e; }
+  .duty-kr .duty-country-head { background: #1d4ed8; }
+  .duty-kv {
+    list-style: none;
+    margin: 0;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .duty-kv li {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #e5e7eb;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+  .duty-kv li:last-child { border-bottom: none; padding-bottom: 0; }
+  .duty-kv strong {
+    display: block;
+    min-width: 0;
+    margin-bottom: 2px;
+    color: var(--text);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.2px;
+  }
 
   /* exchange cards */
   .exchange-grid {
@@ -1130,40 +1180,11 @@
     .exchange-grid { grid-template-columns: 1fr; gap: 8px; }
     .exchange-rec { grid-column: span 1; }
     .exchange-card { padding: 12px; }
-
-    .duty-table thead { display: none; }
-    .duty-table,
-    .duty-table tbody,
-    .duty-table tr,
-    .duty-table td {
-      display: block;
-      width: 100%;
-    }
-    .duty-table tr {
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: #fff;
-      margin-bottom: 8px;
-      overflow: hidden;
-    }
-    .duty-table tr:nth-child(even) { background: #fff; }
-    .duty-table td {
-      padding: 8px 10px;
-      border-bottom: 1px dashed #e5e7eb;
-      white-space: normal;
-    }
-    .duty-table td:last-child { border-bottom: none; }
-    .duty-table td:first-child {
-      width: auto;
-      background: #f8f9fb;
-      font-size: 13px;
-      white-space: normal;
-    }
-    .duty-table td[data-label]::before {
-      content: attr(data-label) " : ";
-      font-weight: 700;
-      color: var(--text);
-    }
+    .duty-country-grid { grid-template-columns: 1fr; }
+    .duty-country-head { font-size: 14px; padding: 9px 12px; }
+    .duty-kv { padding: 10px 12px; }
+    .duty-kv li { font-size: 12px; padding-bottom: 7px; }
+    .duty-kv strong { font-size: 11px; }
   }
 
   /* hotel info */
@@ -2446,25 +2467,42 @@
       </table>
 
       <div class="baggage-section-title" style="margin-top:14px;">중국/홍콩/한국 입국 면세·반입 한도 요약</div>
-      <table class="prep-table duty-table">
-        <thead>
-          <tr><th>구분</th><th>중국 입국</th><th>홍콩 입국</th><th>한국 입국</th></tr>
-        </thead>
-        <tbody>
-          <tr><td style="width:120px;">여행자 휴대품 면세</td><td data-label="중국">CNY 2,000 (약 45만원)</td><td data-label="홍콩">-</td><td data-label="한국">USD 800 (약 121만원)</td></tr>
-          <tr><td>담배</td><td data-label="중국">궐련 400개비 또는 시가 100개비</td><td data-label="홍콩">궐련 19개비, 시가 1개, 기타 담배류 25g</td><td data-label="한국">1보루(200개비)</td></tr>
-          <tr><td>전자담배</td><td data-label="중국">흡연도구 2개, 액상 12ml, 궐련형 세트 6개 (용량표기 없는 액상 반입 금지)</td><td data-label="홍콩">모든 종류 반입 금지 (궐련형/액상형/부품 포함)</td><td data-label="한국">-</td></tr>
-          <tr><td>주류</td><td data-label="중국">12도 이상 1.5L 이하</td><td data-label="홍콩">30도 이상 1L 이하 1병</td><td data-label="한국">2L 이하 + 총액 USD 400 이하</td></tr>
-          <tr><td>현금</td><td data-label="중국">USD 5,000 또는 CNY 20,000 이하</td><td data-label="홍콩">HKD 120,000 이하</td><td data-label="한국">-</td></tr>
-          <tr><td>향수</td><td data-label="중국">-</td><td data-label="홍콩">-</td><td data-label="한국">100ml</td></tr>
-        </tbody>
-      </table>
-      <div class="tip-box" style="margin-top:10px;">
-        ⚠️ <strong>홍콩 유의:</strong> 궐련 19개비 초과 미신고 시 최소 HKD 5,000 벌금, 전자담배 소지 적발 시 최대 HKD 50,000 벌금 및 징역형 가능.<br>
-        지정 흡연구역 외 흡연 적발 시 최소 HKD 3,000 벌금이 부과될 수 있습니다.
+      <div class="duty-wrap">
+        <div class="duty-country-grid">
+          <div class="duty-country-card duty-cn">
+            <div class="duty-country-head">중국 입국</div>
+            <ul class="duty-kv">
+              <li><strong>면세</strong>CNY 2,000 (약 45만원)</li>
+              <li><strong>담배</strong>궐련 400개비 또는 시가 100개비</li>
+              <li><strong>전자담배</strong>흡연도구 2개, 액상 12ml, 궐련형 세트 6개 (무표기 액상 반입 금지)</li>
+              <li><strong>주류</strong>12도 이상 1.5L 이하</li>
+              <li><strong>현금</strong>USD 5,000 또는 CNY 20,000 이하</li>
+            </ul>
+          </div>
+          <div class="duty-country-card duty-hk">
+            <div class="duty-country-head">홍콩 입국</div>
+            <ul class="duty-kv">
+              <li><strong>담배</strong>궐련 19개비, 시가 1개, 기타 담배류 25g</li>
+              <li><strong>전자담배</strong>모든 종류 반입 금지 (궐련형/액상형/부품 포함)</li>
+              <li><strong>주류</strong>30도 이상 1L 이하 1병</li>
+              <li><strong>현금</strong>HKD 120,000 이하</li>
+              <li><strong>벌금 유의</strong>담배 초과 미신고 최소 HKD 5,000, 전자담배 최대 HKD 50,000 + 징역 가능</li>
+            </ul>
+          </div>
+          <div class="duty-country-card duty-kr">
+            <div class="duty-country-head">한국 입국</div>
+            <ul class="duty-kv">
+              <li><strong>면세</strong>USD 800 (약 121만원)</li>
+              <li><strong>담배</strong>1보루 (200개비)</li>
+              <li><strong>주류</strong>2L 이하 + 총액 USD 400 이하</li>
+              <li><strong>향수</strong>100ml</li>
+              <li><strong>유의</strong>담배/주류/향수는 800달러와 별개로 수량 제한 적용</li>
+            </ul>
+          </div>
+        </div>
       </div>
       <div class="tip-box" style="margin-top:8px;">
-        ⚠️ <strong>한국 입국 유의:</strong> 담배/주류/향수는 USD 800 이하라도 별도 반입 수량 제한이 적용됩니다.
+        ⚠️ <strong>흡연 유의:</strong> 홍콩은 지정 흡연구역 외 흡연 시 최소 HKD 3,000 벌금이 부과될 수 있습니다.
       </div>
 
       <div class="prep-check-bar">
