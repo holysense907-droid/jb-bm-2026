@@ -1127,6 +1127,10 @@
   .airport-table td:first-child { font-weight: 700; color: var(--text); white-space: normal; word-break: keep-all; }
 
   @media (max-width: 640px) {
+    .exchange-grid { grid-template-columns: 1fr; gap: 8px; }
+    .exchange-rec { grid-column: span 1; }
+    .exchange-card { padding: 12px; }
+
     .duty-table thead { display: none; }
     .duty-table,
     .duty-table tbody,
@@ -2577,9 +2581,9 @@
     <div class="prep-panel" id="prep-4">
       <div class="weather-notice" style="background:#fdf2f5;border-color:var(--lg-red);color:#7a0026;">
         <strong>유의사항</strong><br>
-        기본 식사 및 이동은 프로그램에서 지원되오나, 개인 용도의 결제를 위해 아래와 같이 준비해주시기 바랍니다.<br>
-        심천: 중국 현지에서는 현금 및 일반 신용카드 사용이 제한되는 경우가 많습니다. Alipay 등의 모바일 결제 수단을 반드시 사전에 준비하시기 바랍니다.<br>
-        홍콩: 해외 결제 가능한 VISA/MASTER 카드 또는 홍콩 달러(HKD) 현금을 준비하시기 바랍니다. 야시장·작은 상점은 현금 결제만 가능한 경우가 있습니다.
+        기본 식사 및 이동은 프로그램에서 지원됩니다. 개인 결제는 아래 기준으로 준비해 주세요.<br>
+        심천: Alipay(카카오페이/토스페이 연동 포함) 사전 등록 권장<br>
+        홍콩: VISA/MASTER 카드 + HKD 현금(야시장/소형 매장 현금 결제 가능성)
       </div>
       <div class="exchange-grid">
         <div class="exchange-card">
@@ -2595,7 +2599,7 @@
         <div class="exchange-card exchange-rec">
           <div class="exchange-label">추천 결제 수단</div>
           <div class="exchange-val" style="font-size:15px;">심천: Alipay / 홍콩: VISA·MASTER + HKD 현금</div>
-          <div class="exchange-sub">심천은 알리페이(카카오페이·토스페이 연동 포함) 사전 등록 권장, 홍콩은 해외 결제 카드와 소액 현금 병행 권장.</div>
+          <div class="exchange-sub">심천은 모바일 결제, 홍콩은 카드+현금 병행이 가장 안정적입니다.</div>
         </div>
       </div>
       <div style="font-size:12px;color:#6b7280;margin-top:6px;text-align:right;" id="fx-updated">환율 출처: exchangerate.host</div>
@@ -2691,11 +2695,11 @@
         <tbody>
           <tr>
             <td style="width:120px;">대한항공 온라인 체크인</td>
-            <td>온라인 체크인 사이트: <a href="https://www.koreanair.com/check-in" target="_blank" rel="noopener noreferrer">https://www.koreanair.com/check-in</a><br>예약번호 또는 항공권 번호 / 출발일 / 탑승자 영문 성 / 탑승자 영문 이름 입력 후 예약 조회<br>출발 48시간 전부터 1시간 전까지 대한항공 앱/웹에서 체크인 가능 (국제선 기준)<br>체크인 후 모바일 탑승권 발급 가능하며, 위탁 수하물이 있으면 공항 수하물 전용 카운터 이용</td>
+            <td>사이트: <a href="https://www.koreanair.com/check-in" target="_blank" rel="noopener noreferrer">koreanair.com/check-in</a><br>예약 조회: 예약번호(또는 항공권번호) + 출발일 + 영문 성/이름<br>가능 시간: 출발 48시간 전 ~ 1시간 전 (국제선)<br>위탁 수하물은 공항 카운터에서 접수</td>
           </tr>
           <tr>
             <td>스마트패스</td>
-            <td>인천공항 스마트패스 앱에서 여권/안면정보를 사전 등록하면 출국장 및 탑승게이트에서 얼굴인증으로 빠른 통과 가능<br>여권 실물은 반드시 소지하고, 미등록자/오류 발생 시 일반 라인 이용<br>※ Play Store or App Store에서 ICN SMARTPASS 다운로드 후 계정 생성 및 등록 진행</td>
+            <td>Play Store / App Store에서 ICN SMARTPASS 설치 후 계정/여권/안면 등록<br>출국장·탑승게이트 얼굴인증 빠른 통과 가능<br>여권 실물 필수, 오류 발생 시 일반 라인 이용</td>
           </tr>
         </tbody>
       </table>
